@@ -1,8 +1,8 @@
 $(document).ready(function() {
+    var madonna = new Person("Madonna", new moment("1958-8-16"));
 
     $("#dogForm").submit(function(event) {
         event.preventDefault();
-
         var $inputs = $('#dogForm :input');
 
         (function() {
@@ -11,10 +11,12 @@ $(document).ready(function() {
                 formValues[this.name] = $(this).val();
             });
 
+            var dog = new Dog(formValues.name, new moment(formValues.birthdate));
+
             $("#mdd").text(function() {
-                return formValues.dogName +
+                return dog.name +
                     "'s Madonna Dog Day is " +
-                    getMdd(formValues.dogBday);
+                    getMdd(dog, madonna);
 
             })
 
@@ -23,7 +25,20 @@ $(document).ready(function() {
         $("#dogForm").trigger('reset');
     });
 })
-    
-function getMdd(bday) {
-    return bday;
+
+var Person = function(name, birthdate) {
+    this.name = name;
+    this.birthdate = birthdate;
+}
+
+var Dog = function(name, birthdate) {
+    this.name = name;
+    this.birthdate = birthdate;
+}
+
+function getMdd(dog, celeb) {
+    var daysOldAtDogBday = dog.birthdate.diff(celeb.birthdate, 'Days'),
+        dayOldAdjusted = daysOldAtDogBday * 7 / 6;
+
+    return moment(dog.birthdate, "DD-MM-YYYY").add((dayOldAdjusted - daysOldAtDogBday), 'Days').format('MM/DD/YYYY');
 }
