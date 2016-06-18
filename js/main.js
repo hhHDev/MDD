@@ -1,44 +1,46 @@
-$(document).ready(function() {
-    var madonna = new Person("Madonna", new moment("1958-8-16"));
+angular.module('mddApp', [
+    'mddController', 'ngAnimate'
+]);
 
-    $("#dogForm").submit(function(event) {
-        event.preventDefault();
-        var $inputs = $('#dogForm :input');
+// Controller
+angular.module('mddApp', []).
+controller('mddController', function($scope, Dog, Person) {
+    var madonna = new Person("Madonna", new moment("1958-8-16")), dog = new Dog();
 
-        (function() {
-            var formValues = {};
-            $inputs.each(function() {
-                formValues[this.name] = $(this).val();
-            });
+    $scope.dogFormSubmitted = function(form) {
+        dog.name = $scope.name;
+        dog.birthdate = new moment($scope.birthdate);
+        $scope.mdd = getMdd(dog, madonna);
+    }
 
-            var dog = new Dog(formValues.name, new moment(formValues.birthdate));
+    function getMdd(dog, celeb) {
+        var daysOldAtDogBday = dog.birthdate.diff(celeb.birthdate, 'Days'),
+            dayOldAdjusted = daysOldAtDogBday * 7 / 6;
 
-            $("#mdd").text(function() {
-                return dog.name +
-                    "'s Madonna Dog Day is " +
-                    getMdd(dog, madonna);
+        return moment(dog.birthdate, "DD-MM-YYYY").add((dayOldAdjusted - daysOldAtDogBday), 'Days').format('MM/DD/YYYY');
+    }
 
-            })
+});
 
-        })();
 
-        $("#dogForm").trigger('reset');
-    });
-})
+// Models
+angular.module('mddApp').
+factory('Person', function() {
 
-var Person = function(name, birthdate) {
-    this.name = name;
-    this.birthdate = birthdate;
-}
+    function Person(name, birthdate) {
+        this.name = name;
+        this.birthdate = birthdate;
+    }
 
-var Dog = function(name, birthdate) {
-    this.name = name;
-    this.birthdate = birthdate;
-}
+    return Person;
+});
 
-function getMdd(dog, celeb) {
-    var daysOldAtDogBday = dog.birthdate.diff(celeb.birthdate, 'Days'),
-        dayOldAdjusted = daysOldAtDogBday * 7 / 6;
+angular.module('mddApp').
+factory('Dog', function() {
+    function Dog(name, birthdate) {
+        this.name = name;
+        this.birthdate = birthdate;
+    }
 
-    return moment(dog.birthdate, "DD-MM-YYYY").add((dayOldAdjusted - daysOldAtDogBday), 'Days').format('MM/DD/YYYY');
-}
+    return Dog;
+});
