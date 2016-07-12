@@ -35,11 +35,14 @@
 
     <div class="jumbotron">
         <div class="container">
-            <form class="form-horizontal" id="dogForm", name="dogForm", ng-submit="dogForm.$valid && dogFormSubmitted(dogForm)">
+            <form class="form-horizontal" id="dogForm", name="dogForm", ng-submit="dogForm.$valid && dogFormSubmitted(dogForm)", onsubmit="showHide()">
                 <fieldset>
 
                     <!-- Form Name -->
-                    <legend>Madonna Dog Day</legend>
+                    <legend class="form-name">Madonna Dog&nbsp;Day</legend>
+                    <div id="colt">
+                        <img src="DSCF4808.jpeg" alt="Colt" />
+                    </div>    
 
                     <!-- Text input-->
                     <div class="form-group">
@@ -66,11 +69,16 @@
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="submit"></label>
                         <div class="col-md-4">
-                            <button id="submit" name="submit" type="submit" class="btn btn-primary">Find your dog's MDD!</button>
+                            <button id="submit" name="submit" type="submit" class="btn btn-primary">Find your dog's<br /> Madonna Dog Day!</button>
                         </div>
                     </div>
                     <div>
-                        <p ng-if="dogForm.$valid && dogForm.$submitted", id="mdd"> {{name}}'s Madonna Dog Day is {{mdd}}</p>
+                        <div ng-if="dogForm.$valid && dogForm.$submitted", id="mdd"> 
+                            <p>{{name}}'s Madonna Dog Day is {{mdd}}</p>
+                            <div id="submit-photo">
+                                <img src="9093950793_735c7a57da_o.jpg" alt="Madonna" />
+                            </div>   
+                        </div>     
                     </div>
                 </fieldset>
             </form>
@@ -79,7 +87,7 @@
     </div>
 
 
-    <hr>
+   
 
     <footer>
         <p>&copy; hhHDev 2016</p>
@@ -114,6 +122,19 @@
         ga('create', 'UA-XXXXX-X', 'auto');
         ga('send', 'pageview');
     </script>
+
+    <script type="text/javascript">
+         function showHide() {
+           var div = document.getElementById('submit-photo');
+           if (div.style.display == 'none') {
+             div.style.display = '';
+           }
+           else {
+             div.style.display = 'none';
+           }
+         }
+        </script>
+
 </body>
 
 </html>

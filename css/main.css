@@ -1,10 +1,71 @@
-
-
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
+@import 'https://fonts.googleapis.com/css?family=Bangers';
+
+.form-name {
+	font-size: 13.4rem;
+	line-height: 15rem;
+	color: #FACC26;
+	text-align: center;
+	font-family: Bangers, helvetica, serif;
+	border-bottom: none;
+	text-shadow: 5px 5px #000000;
+}
+
+.jumbotron {
+	background-color: rgba(116,159,179,0.45);
+	width: 90%;
+	margin: 0 auto;
+}
 
 
+body {
+	background-image: url("../wood_1_@2X.png");
+	background-repeat: repeat;
+	background-attachment: fixed;
+}
+
+#colt {
+	text-align: center;
+	margin: 2.5% 0 5% 0;
+}
+
+.control-label {
+	color: #fff;
+	font-size: 2.5rem;
+	line-height: 2.8rem;
+}
+
+.form-group .row {
+	margin-bottom: 5%;
+}
+
+input {
+	width: 60%;
+}
+
+#submit {
+	width: 100%;
+	height: 9rem;
+	font-size: 3rem;
+	line-height: 3.4rem;
+	
+}
+
+#mdd p {
+	margin-top: 5%;
+	color: red;
+	font-size: 5.5rem;
+	line-height: 6.6rem;
+	font-weight: bold;
+}
+
+#submit-photo {
+
+	text-align: center;
+	margin-top: 5%;
+}
 
 .animation {
   -webkit-transition: 1s;
@@ -24,6 +85,14 @@
 
 .animation.ng-leave.ng-leave-active {
   opacity: 0;
+}
+
+
+@media screen and (max-width: 700px) {
+	.form-name {
+		font-size: 8.5rem;
+		line-height: 9.2rem;
+	}
 }
 
 
